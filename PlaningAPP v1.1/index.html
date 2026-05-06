@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills & Goals Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="plus-icon" onclick="addSkill()" title="Додати навичку">+</span>
+                <h2>Навички</h2>
+            </div>
+            <ul id="skills-list"></ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-nav">
+                <h1 id="skill-title">Виберіть навичку</h1>
+                <div class="main-actions">
+                    <button class="btn btn-long" onclick="promptNewGoal('long')">+ Довгострокова</button>
+                    <button class="btn btn-mid" onclick="promptNewGoal('mid')">+ Середньострокова</button>
+                    <button class="btn btn-short" onclick="promptNewGoal('short')">+ Короткострокова</button>
+                    <button class="btn btn-template" onclick="openTemplateModal()">+ Шаблони</button>
+                </div>
+            </div>
+
+            <section id="active-goals" class="goals-container"></section>
+
+            <section class="archive-section">
+                <div class="archive-header" onclick="toggleArchiveVisibility()">
+                    <h3>Архів виконаних цілей (<span id="archive-count">0</span>)</h3>
+                    <span id="archive-toggle-icon">▼</span>
+                </div>
+                <div id="archive-list" class="goals-container hidden"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="template-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Шаблони</h2>
+                <span class="close-modal" onclick="closeTemplateModal()">&times;</span>
+            </div>
+            
+            <div class="modal-body">
+                <button class="btn-create-template" onclick="toggleCreateTemplateForm()">+ Створити новий шаблон</button>
+                
+                <div id="create-template-form" class="template-form hidden">
+                    <input type="text" id="tpl-name" placeholder="Назва шаблону (напр. План на кожен день)">
+                    <div id="tpl-goals-list">
+                        <input type="text" class="tpl-goal-input" placeholder="Середньострокова ціль (основна)">
+                        <input type="text" class="tpl-goal-input" placeholder="Короткострокова ціль (підзадача 1)">
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-add-input" onclick="addInputToTemplate()">+ Додати ще ціль</button>
+                        <button class="btn-save-tpl" onclick="saveNewTemplate()">Зберегти</button>
+                    </div>
+                </div>
+
+                <div class="my-templates-section">
+                    <h3>Мої шаблони</h3>
+                    <ul id="my-templates-list"></ul>
+                </div>
+
+                <div class="attach-section">
+                    <h3>Вибрати ціль для прикріплення:</h3>
+                    <select id="parent-goal-select">
+                        <option value="root">Без прикріплення (в корінь)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
